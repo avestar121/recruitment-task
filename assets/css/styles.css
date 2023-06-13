@@ -48,6 +48,10 @@ tbody tr:nth-child(even) {
     background-color: #F74949;
 }
 
+.addUser.redBackground:hover {
+    background-color: #CC3D3D;
+}
+
 .removeUser{
     color: #F74949;
     background: transparent;
@@ -90,9 +94,14 @@ input{
     font-weight: bold;
 }
 
-.addUser:hover,
-.submitForm:hover,
 .removeUser:hover{
     cursor: pointer;
+}
+
+.addUser:hover,
+.submitForm:hover
+{
+    cursor: pointer;
+    background-color: #4EDB40;
 }
 
