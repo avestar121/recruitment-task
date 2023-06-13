@@ -1,3 +1,4 @@
+<!-- main.php -->
 <?php
 $userData = file_get_contents(__DIR__ . '/../dataset/users.json');
 $users = json_decode($userData, true);
@@ -56,42 +57,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="../assets/js/script.js"></script>
 </head>
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Phone</th>
-                <th>Company</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($users as $user): ?>
-                <tr class='userRow'>
-                    <td><?php echo $user['name']; ?></td>
-                    <td><?php echo $user['username']; ?></td>
-                    <td><?php echo $user['email']; ?></td>
-                    <td><?php echo $user['address']['street']; ?>, <?php echo $user['address']['zipcode']; ?> <?php echo $user['address']['city']; ?></td>
-                    <td><?php echo $user['phone']; ?></td>
-                    <td><?php echo $user['company']['name']; ?></td>
-                    <td>
-                        <form action="../partials/main.php" method="GET">
-                            <button type="submit" class="removeUser" name="remove_user" value="<?php echo $user['id']; ?>">Remove</button>
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+    <?php include 'users_table.php'; ?>
+
     <div class="centerButton">
         <button id="addUserButton" class="addUser" onclick="toggleForm()">Add User</button>
     </div>
     <form id="userForm" action="../partials/main.php" method="POST" hidden>
         <div class="inputform">
-            <div class="userInput" >
+            <div class="userInput">
                 <input type="text" id="name" placeholder="Name" name="name" required><br>
                 <input type="text" id="username" placeholder="Username" name="username" required><br>
                 <input type="email" id="email" placeholder="Email" name="email" required><br>
@@ -99,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="text" id="suite" placeholder="Suite" name="suite" required><br>
                 <input type="text" id="city" placeholder="City" name="city" required><br>
             </div>
-            <div class="userInput" >
+            <div class="userInput">
                 <input type="text" id="zipcode" placeholder="Zipcode" name="zipcode" required><br>
                 <input type="text" id="phone" placeholder="Phone" name="phone" required><br>
                 <input type="text" id="website" placeholder="Website" name="website" required><br>
