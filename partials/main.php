@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <th>Address</th>
                 <th>Phone</th>
                 <th>Company</th>
-                <th>Actions</th> <!-- Add a new column for the Remove button -->
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -79,53 +79,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <td><?php echo $user['company']['name']; ?></td>
                     <td>
                         <form action="../partials/main.php" method="GET">
-                            <button type="submit" name="remove_user" value="<?php echo $user['id']; ?>">Remove</button>
+                            <button type="submit" class="removeUser" name="remove_user" value="<?php echo $user['id']; ?>">Remove</button>
                         </form>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
-
-    <h2>Add User</h2>
-    <form action="../partials/main.php" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br>
-
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br>
-
-        <label for="street">Street:</label>
-        <input type="text" id="street" name="street" required><br>
-
-        <label for="suite">Suite:</label>
-        <input type="text" id="suite" name="suite" required><br>
-
-        <label for="city">City:</label>
-        <input type="text" id="city" name="city" required><br>
-
-        <label for="zipcode">Zipcode:</label>
-        <input type="text" id="zipcode" name="zipcode" required><br>
-
-        <label for="phone">Phone:</label>
-        <input type="text" id="phone" name="phone" required><br>
-
-        <label for="website">Website:</label>
-        <input type="text" id="website" name="website" required><br>
-
-        <label for="company_name">Company Name:</label>
-        <input type="text" id="company_name" name="company_name" required><br>
-
-        <label for="catch_phrase">Catch Phrase:</label>
-        <input type="text" id="catch_phrase" name="catch_phrase" required><br>
-
-        <label for="bs">BS:</label>
-        <input type="text" id="bs" name="bs" required><br>
-
-        <button type="submit">Add User</button>
+    <div class="centerButton">
+        <button id="addUserButton" class="addUser" onclick="toggleForm()">Add User</button>
+    </div>
+    <form id="userForm" action="../partials/main.php" method="POST" hidden>
+        <div class="inputform">
+            <div class="userInput" >
+                <input type="text" id="name" placeholder="Name" name="name" required><br>
+                <input type="text" id="username" placeholder="Username" name="username" required><br>
+                <input type="email" id="email" placeholder="Email" name="email" required><br>
+                <input type="text" id="street" placeholder="Street" name="street" required><br>
+                <input type="text" id="suite" placeholder="Suite" name="suite" required><br>
+                <input type="text" id="city" placeholder="City" name="city" required><br>
+            </div>
+            <div class="userInput" >
+                <input type="text" id="zipcode" placeholder="Zipcode" name="zipcode" required><br>
+                <input type="text" id="phone" placeholder="Phone" name="phone" required><br>
+                <input type="text" id="website" placeholder="Website" name="website" required><br>
+                <input type="text" id="company_name" placeholder="Company Name" name="company_name" required><br>
+                <input type="text" id="catch_phrase" placeholder="Catch Phrase" name="catch_phrase" required><br>
+                <input type="text" id="bs" name="bs" placeholder="BS" required><br>
+            </div>
+        </div>
+        <div class="centerButton">
+            <button type="submit" class="submitForm">Add User</button>
+        </div>
     </form>
+    <script>
+        function toggleForm() {
+            var form = document.getElementById("userForm");
+            var addButton = document.getElementById("addUserButton");
+
+            if (form.hasAttribute("hidden")) {
+                form.removeAttribute("hidden");
+                addButton.textContent = "Cancel";
+                addButton.classList.add("redBackground");
+            } else {
+                form.setAttribute("hidden", "true");
+                addButton.textContent = "Add User";
+                addButton.classList.remove("redBackground");
+            }
+        }
+    </script>
 </body>
 </html>
