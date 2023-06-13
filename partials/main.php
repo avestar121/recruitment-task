@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </thead>
         <tbody>
             <?php foreach ($users as $user): ?>
-                <tr>
+                <tr class='userRow'>
                     <td><?php echo $user['name']; ?></td>
                     <td><?php echo $user['username']; ?></td>
                     <td><?php echo $user['email']; ?></td>
